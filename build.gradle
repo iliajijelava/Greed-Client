@@ -57,6 +57,7 @@ dependencies {
     // Runtime copy comes jar-in-jar from Fabric API (io.github.llamalad7:mixinextras-fabric:0.5.4).
     modCompileOnly "io.github.llamalad7:mixinextras-fabric:0.5.4"
     implementation "com.ferra13671:discord-ipc:1.2"
+    include "com.ferra13671:discord-ipc:1.2"
     // Baritone API (local jar)
     modImplementation name: 'baritone-api-fabric-1.13.1'
     // Nether pathfinder (required by Baritone at runtime - jar-in-jar not supported in dev)

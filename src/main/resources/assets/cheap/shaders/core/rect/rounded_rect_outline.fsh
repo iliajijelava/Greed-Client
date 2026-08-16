@@ -1,6 +1,6 @@
 #version 150
 
-#moj_import <cheap:common.glsl>
+#moj_import <cheap:fragment.glsl>
 
 in vec2 FragCoord;
 in vec4 FragColor;

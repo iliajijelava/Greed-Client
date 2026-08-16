@@ -1,0 +1,11 @@
+145: private void findResolverPoint() {
+209: attackTick();
+214: if (canStopSprinting()) e.cancel();
+296: if (!shouldAttack()) return;
+348: private boolean shouldAttack() {
+408: return shouldAttack();
+411: public boolean canStopSprinting() {
+419: private void updateTarget() {
+445: private void updateVanillaRotation(LivingEntity target) {
+456: private void updateSmoothRotation(LivingEntity target) {
+501: private void renderPredictPoint(MatrixStack matrices) {

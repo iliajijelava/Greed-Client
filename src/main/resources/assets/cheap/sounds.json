@@ -1,0 +1,26 @@
+{
+  "opengui": {
+    "sounds": ["opengui"]
+  },
+  "closegui": {
+    "sounds": ["closegui"]
+  },
+  "first": {
+    "sounds": ["first"]
+  },
+  "second": {
+    "sounds": ["second"]
+  },
+  "third": {
+    "sounds": ["third"]
+  },
+  "fourth": {
+    "sounds": ["fourth"]
+  },
+  "fifth": {
+    "sounds": ["fifth"]
+  },
+  "sixth": {
+    "sounds": ["sixth"]
+  }
+}

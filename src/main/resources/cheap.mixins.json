@@ -1,0 +1,59 @@
+{
+  "required": true,
+  "package": "fun.ogi.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "ICameraMixin",
+    "CameraMixin",
+    "MinecraftClientAccessor",
+    "ChatScreenMixin",
+    "MinecraftClientMixin",
+    "WorldRendererMixin",
+    "InGameHudMixin",
+    "MouseMixin",
+    "HeldItemRendererMixin",
+    "ClientPlayerInteractionManagerMixin",
+    "ClientConnectionMixin",
+    "BackgroundRendererMixin",
+    "BlockCollisionMixin",
+    "EntityRenderMixin",
+    "ItemStackTooltipMixin",
+    "EntityRendererMixin",
+    "HeldItemRendererInvoker",
+    "ClientPlayerEntityMixin",
+    "LivingEntityRendererAccessor",
+    "LivingEntityRendererMixin",
+    "ChatHudMixin",
+    "PlayerListHudMixin",
+    "ScoreboardEntryMixin",
+    "SidebarMixin",
+    "GameRendererMixin",
+    "BossBarHudMixin",
+    "InGameOverlayRendererMixin",
+    "HandledScreenAccessor",
+    "HandledScreenRenderMixin",
+    "ShaderESPTeamColorMixin",
+    "MinecraftHasOutlineMixin",
+    "ShaderESPVanillaOutlineMixin",
+    "ScreenMixin",
+    "ItemCooldownManagerAccessor",
+    "ItemCooldownManagerEntryAccessor"
+  ],
+  "mixins": [
+    "LivingEntityAccessor",
+    "LivingEntityMixin",
+    "EntityMixin",
+    "ExampleMixin",
+    "TitleScreenMixin",
+    "AltManagerMixin",
+    "SlotAccessor",
+    "WorldMixin",
+    "WorldRendererAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}

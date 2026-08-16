@@ -1,0 +1,20 @@
+{
+  "vertex": "cheap:core/kawase_down/kawase_down",
+  "fragment": "cheap:core/hands/hands_fill",
+  "samplers": [
+    { "name": "Sampler0" }
+  ],
+  "uniforms": [
+    { "name": "ModelViewMat", "type": "matrix4x4", "count": 16, "values": [1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0] },
+    { "name": "ProjMat", "type": "matrix4x4", "count": 16, "values": [1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0] },
+    { "name": "fillColor", "type": "float", "count": 3, "values": [1.0, 0.27, 0.27] },
+    { "name": "fillAlpha", "type": "float", "count": 1, "values": [0.8] },
+    { "name": "shadingStrength", "type": "float", "count": 1, "values": [0.3] },
+    { "name": "keepShading", "type": "float", "count": 1, "values": [1.0] },
+    { "name": "rainbow", "type": "float", "count": 1, "values": [0.0] },
+    { "name": "rainbowTime", "type": "float", "count": 1, "values": [0.0] },
+    { "name": "rainbowSpeed", "type": "float", "count": 1, "values": [0.4] },
+    { "name": "rainbowScale", "type": "float", "count": 1, "values": [1.0] },
+    { "name": "screenH", "type": "float", "count": 1, "values": [1080.0] }
+  ]
+}

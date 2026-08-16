@@ -1,0 +1,107 @@
+plugins {
+    id 'net.fabricmc.fabric-loom-remap' version "${loom_version}"
+    id 'maven-publish'
+}
+
+version = project.mod_version
+group = project.maven_group
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.release = 21
+}
+
+loom {
+    accessWidenerPath = file("src/main/resources/cheap.accesswidener")
+}
+// --- Figura ---
+def figuraDependency = (gradle.startParameter.projectProperties['figuraDependency'] ?: 'maven.modrinth:s9gIPDom:AHWzDWSx').toString()
+def figuraNestedRuntimeDir = layout.buildDirectory.dir("figura-nested-runtime")
+// --- /Figura ---
+
+repositories {
+    maven { url = 'https://maven.fabricmc.net/' }
+    maven {
+        name = "ferra13671-maven"
+        url = "https://ferra13671.github.io/maven/"
+    }
+    mavenCentral()
+    exclusiveContent {
+        forRepository {
+            maven { name = 'Modrinth'; url = 'https://api.modrinth.com/maven' }
+        }
+        filter { includeGroup 'maven.modrinth' }
+    }
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    // To change the versions see the gradle.properties file
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+    // Fabric API. This is technically optional, but you probably want it anyway.
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+
+    // Hold My Items (compat: SwingAnimations "HMI" mode delegates to its renderOverhaul)
+    modImplementation name: 'hold-my-items-4.3'
+
+    // MixinExtras for @WrapOperation in HeldItemRendererHMIMixin.
+    // Runtime copy comes jar-in-jar from Fabric API (io.github.llamalad7:mixinextras-fabric:0.5.4).
+    modCompileOnly "io.github.llamalad7:mixinextras-fabric:0.5.4"
+    implementation "com.ferra13671:discord-ipc:1.2"
+    // Baritone API (local jar)
+    modImplementation name: 'baritone-api-fabric-1.13.1'
+    // Nether pathfinder (required by Baritone at runtime - jar-in-jar not supported in dev)
+    implementation name: 'nether-pathfinder-1.4.1'
+
+    // --- Figura ---
+    modImplementation(figuraDependency)
+    include(figuraDependency)
+    compileOnly "org.luaj:luaj-jse:3.0.1"
+    compileOnly "com.neovisionaries:nv-websocket-client:2.14"
+    runtimeOnly(fileTree(dir: figuraNestedRuntimeDir.get().asFile, include: ["*.jar"]))
+    // --- /Figura ---
+
+    // DJL (neuro rotation)
+    include modImplementation("ai.djl:api:0.32.0")
+    include modImplementation("ai.djl.pytorch:pytorch-engine:0.32.0")
+    runtimeOnly "ai.djl.pytorch:pytorch-native-cpu:2.1.2"
+}
+
+// --- Figura: extract nested jars (luaj, nv-websocket, etc.) into a dir added to the dev runtime classpath ---
+tasks.register('extractFiguraNestedJars') {
+    def outDir = figuraNestedRuntimeDir.get().asFile
+    outputs.dir(outDir)
+    doLast {
+        def figuraFile = configurations.modImplementation.files.find { it.name.startsWith('s9gIPDom') }
+        if (figuraFile == null) {
+            throw new GradleException('Figura mod jar not found in modImplementation configuration')
+        }
+        delete(outDir)
+        outDir.mkdirs()
+        copy {
+            from(zipTree(figuraFile)) {
+                include 'META-INF/jars/*.jar'
+                exclude 'META-INF/jars/fabric-*.jar'
+                exclude 'META-INF/jars/mixinextras-fabric-*.jar'
+            }
+            into outDir
+            eachFile { details ->
+                details.relativePath = new RelativePath(true, details.name)
+            }
+            includeEmptyDirs = false
+        }
+    }
+}
+
+tasks.named('runClient') { dependsOn tasks.named('extractFiguraNestedJars') }
+tasks.named('remapJar') { dependsOn tasks.named('extractFiguraNestedJars') }
+// --- /Figura ---

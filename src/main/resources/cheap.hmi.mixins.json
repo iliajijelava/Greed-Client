@@ -1,0 +1,11 @@
+{
+  "required": false,
+  "package": "fun.ogi.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "HeldItemRendererHMIMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

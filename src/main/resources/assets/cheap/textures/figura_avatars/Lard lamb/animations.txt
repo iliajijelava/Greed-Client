@@ -1,0 +1,10 @@
+local anims = require("JimmyAnims")
+anims(animations.LargeLamb)
+
+--
+require("GSAnimBlend")
+local anims = require("JimmyAnims")
+anims.excluBlendTime = 1.5
+anims.incluBlendTime = 1.5
+anims.autoBlend = true
+anims(animations.LargeLamb)

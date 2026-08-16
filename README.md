@@ -1,4 +1,4 @@
-# Cheap
+# Greed
 
 ## Setup
 
